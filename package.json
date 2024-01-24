@@ -23,7 +23,9 @@
         "url": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
         "directory": "types/webidl-conversions"
     },
-    "scripts": {},
+    "scripts": {
+        "start":"node index.js"
+    },
     "dependencies": {
         "config": "^3.3.10",
         "cors": "^2.8.5",
