@@ -29,7 +29,8 @@ mongoose.connection.on("connected", (err, res) => {
 // Middleware
 app.use(express.json());
 app.get('/list', async (req, res) => {
-    const x = await User.find({});
+    const x = await User.find().sort({firstName:1,id:1});
+    console.log(x);
     return res.status(201).json({user:x});
 });
 
@@ -74,7 +75,7 @@ app.put('/updateUser',async (req,res) => {
 
       if(userInfo){
 
-          const result = await User.findByIdAndUpdate({_id},{
+          const result = await User.updateOne({id},{
             $set : {
                 firstName : firstName,lastName:lastName,phoneNumer:phoneNumber,countryCode:countryCode
             }
@@ -103,7 +104,7 @@ catch(err){
 app.delete('/deleteUser',async (req,res) => {
   try{
     const {id} = req.body;
-    const result = await User.findByIdAndDelete({id});
+    const result = await User.deleteOne({id:id});
     res.status(200).json({messgae:"delete user successfull"});
   }
   catch(err){
@@ -111,6 +112,9 @@ app.delete('/deleteUser',async (req,res) => {
   }
 })
 
+app.get("/",()=>{
+  console.log("hello");
+})
 
 
 // Start the server
